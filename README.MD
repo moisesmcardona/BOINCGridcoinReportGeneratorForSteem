@@ -19,3 +19,7 @@ database=the name of the database
 account=steem account
 key=private posting key
 ```
+
+## MySQL information
+
+Please create a database and import the file `boincgridcoin.sql` into your newly created database. Then, configure the settings in the `MySQLConfig.txt` file as explained above.
