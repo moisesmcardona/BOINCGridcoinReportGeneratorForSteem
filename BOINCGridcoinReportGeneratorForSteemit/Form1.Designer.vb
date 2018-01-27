@@ -22,7 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.FetchAndPublish = New System.Windows.Forms.Button()
         Me.WCG = New System.Windows.Forms.CheckBox()
         Me.MW = New System.Windows.Forms.CheckBox()
         Me.CC = New System.Windows.Forms.CheckBox()
@@ -48,22 +48,22 @@ Partial Class Form1
         Me.VGTU = New System.Windows.Forms.CheckBox()
         Me.YAFU = New System.Windows.Forms.CheckBox()
         Me.YH = New System.Windows.Forms.CheckBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.PublishOnly = New System.Windows.Forms.Button()
+        Me.FetchOnly = New System.Windows.Forms.Button()
         Me.SF = New System.Windows.Forms.CheckBox()
         Me.Enigma = New System.Windows.Forms.CheckBox()
         Me.DDAH = New System.Windows.Forms.CheckBox()
         Me.ODLK1 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
-        'Button1
+        'FetchAndPublish
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 236)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(259, 41)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Fetch and generate report"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.FetchAndPublish.Location = New System.Drawing.Point(12, 236)
+        Me.FetchAndPublish.Name = "FetchAndPublish"
+        Me.FetchAndPublish.Size = New System.Drawing.Size(259, 41)
+        Me.FetchAndPublish.TabIndex = 0
+        Me.FetchAndPublish.Text = "Fetch and generate report"
+        Me.FetchAndPublish.UseVisualStyleBackColor = True
         '
         'WCG
         '
@@ -315,23 +315,23 @@ Partial Class Form1
         Me.YH.Text = "yoyo@home"
         Me.YH.UseVisualStyleBackColor = True
         '
-        'Button3
+        'PublishOnly
         '
-        Me.Button3.Location = New System.Drawing.Point(12, 283)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(165, 23)
-        Me.Button3.TabIndex = 30
-        Me.Button3.Text = "Manually Post to Steem"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.PublishOnly.Location = New System.Drawing.Point(12, 283)
+        Me.PublishOnly.Name = "PublishOnly"
+        Me.PublishOnly.Size = New System.Drawing.Size(165, 23)
+        Me.PublishOnly.TabIndex = 30
+        Me.PublishOnly.Text = "Manually Post to Steem"
+        Me.PublishOnly.UseVisualStyleBackColor = True
         '
-        'Button2
+        'FetchOnly
         '
-        Me.Button2.Location = New System.Drawing.Point(183, 283)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(165, 23)
-        Me.Button2.TabIndex = 31
-        Me.Button2.Text = "Generate Report only"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.FetchOnly.Location = New System.Drawing.Point(183, 283)
+        Me.FetchOnly.Name = "FetchOnly"
+        Me.FetchOnly.Size = New System.Drawing.Size(165, 23)
+        Me.FetchOnly.TabIndex = 31
+        Me.FetchOnly.Text = "Generate Report only"
+        Me.FetchOnly.UseVisualStyleBackColor = True
         '
         'SF
         '
@@ -382,8 +382,8 @@ Partial Class Form1
         Me.Controls.Add(Me.DDAH)
         Me.Controls.Add(Me.Enigma)
         Me.Controls.Add(Me.SF)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.FetchOnly)
+        Me.Controls.Add(Me.PublishOnly)
         Me.Controls.Add(Me.YH)
         Me.Controls.Add(Me.YAFU)
         Me.Controls.Add(Me.VGTU)
@@ -409,7 +409,7 @@ Partial Class Form1
         Me.Controls.Add(Me.CC)
         Me.Controls.Add(Me.MW)
         Me.Controls.Add(Me.WCG)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.FetchAndPublish)
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "Team Gridcoin Report Generator for Steemit"
@@ -418,7 +418,7 @@ Partial Class Form1
 
     End Sub
 
-    Friend WithEvents Button1 As Button
+    Friend WithEvents FetchAndPublish As Button
     Friend WithEvents WCG As CheckBox
     Friend WithEvents MW As CheckBox
     Friend WithEvents CC As CheckBox
@@ -444,8 +444,8 @@ Partial Class Form1
     Friend WithEvents VGTU As CheckBox
     Friend WithEvents YAFU As CheckBox
     Friend WithEvents YH As CheckBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents PublishOnly As Button
+    Friend WithEvents FetchOnly As Button
     Friend WithEvents SF As CheckBox
     Friend WithEvents Enigma As CheckBox
     Friend WithEvents DDAH As CheckBox

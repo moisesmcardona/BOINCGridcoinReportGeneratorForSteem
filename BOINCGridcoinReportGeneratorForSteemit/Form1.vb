@@ -5,15 +5,15 @@ Imports MySql.Data.MySqlClient
 Public Class Form1
 
     Public MySQLString As String = ""
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub FetchAndPublish_Click(sender As Object, e As EventArgs) Handles FetchAndPublish.Click
         MainRoutine(True)
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub PublishOnly_Click(sender As Object, e As EventArgs) Handles PublishOnly.Click
         If My.Computer.FileSystem.FileExists(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt") Then GenerateReport.PublishReport() Else MsgBox("report.txt doesn't exist.")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub FetchOnly_Click(sender As Object, e As EventArgs) Handles FetchOnly.Click
         MainRoutine(False)
     End Sub
     Private Sub MainRoutine(Publish As Boolean)
