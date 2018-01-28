@@ -13,7 +13,7 @@ Public Class GenerateReport
         ReportFile.WriteLine("The following data has been fetched directly from their respective BOINC server stats location." & vbCrLf)
         ReportFile.Close()
     End Sub
-    Public Shared Sub PublishReport()
+    Public Shared Sub PublishReport(DateToUse As DateTime)
         Dim MySQLFile As StreamReader = New StreamReader("account.txt")
         Dim currentline As String = ""
         Dim Account As String = ""
@@ -31,7 +31,7 @@ Public Class GenerateReport
         Try
             Dim request As System.Net.WebRequest = System.Net.WebRequest.Create("https://api.steem.place/postToSteem/")
             request.Method = "POST"
-            Dim postData As String = "title=New Users Statistics for Team Gridcoin - " + DateTime.Now.ToString("MM/dd/yyyy") + "&body=" + My.Computer.FileSystem.ReadAllText(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt") + "&author=" & Account & "&permlink=stats-" + DateTime.Now.ToString("yyyy-MM-dd") + "&tags=gridcoin,mining,stats,technology,cryptocurrency&pk=" & Key
+            Dim postData As String = "title=New Users Statistics for Team Gridcoin - " + DateToUse.ToString("MM/dd/yyyy") + "&body=" + My.Computer.FileSystem.ReadAllText(DateToUse.ToString("yyyy-MM-dd") & "\report.txt") + "&author=" & Account & "&permlink=stats-" + DateToUse.ToString("yyyy-MM-dd") + "&tags=gridcoin,mining,stats,technology,cryptocurrency&pk=" & Key
             Dim byteArray As Byte() = Encoding.UTF8.GetBytes(postData)
             request.ContentType = "application/x-www-form-urlencoded"
             request.ContentLength = byteArray.Length
@@ -46,12 +46,12 @@ Public Class GenerateReport
             dataStream.Close()
             response.Close()
             If responseFromServer.Contains("ok") Then
-                MessageBox.Show("Report Generated and posted")
+                MessageBox.Show("Report has been posted successfully")
             Else
-                MessageBox.Show("An error occured while posting the report")
+                MessageBox.Show("An error occured while posting the report: " & Environment.NewLine & responseFromServer)
             End If
         Catch ex As Exception
-            MessageBox.Show("An error has occurred.")
+            MessageBox.Show("An error has occurred trying to post the report.")
         End Try
     End Sub
 End Class

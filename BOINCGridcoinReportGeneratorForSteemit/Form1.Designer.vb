@@ -54,13 +54,14 @@ Partial Class Form1
         Me.Enigma = New System.Windows.Forms.CheckBox()
         Me.DDAH = New System.Windows.Forms.CheckBox()
         Me.ODLK1 = New System.Windows.Forms.CheckBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'FetchAndPublish
         '
-        Me.FetchAndPublish.Location = New System.Drawing.Point(12, 236)
+        Me.FetchAndPublish.Location = New System.Drawing.Point(12, 254)
         Me.FetchAndPublish.Name = "FetchAndPublish"
-        Me.FetchAndPublish.Size = New System.Drawing.Size(259, 41)
+        Me.FetchAndPublish.Size = New System.Drawing.Size(259, 23)
         Me.FetchAndPublish.TabIndex = 0
         Me.FetchAndPublish.Text = "Fetch and generate report"
         Me.FetchAndPublish.UseVisualStyleBackColor = True
@@ -317,18 +318,18 @@ Partial Class Form1
         '
         'PublishOnly
         '
-        Me.PublishOnly.Location = New System.Drawing.Point(12, 283)
+        Me.PublishOnly.Location = New System.Drawing.Point(277, 283)
         Me.PublishOnly.Name = "PublishOnly"
-        Me.PublishOnly.Size = New System.Drawing.Size(165, 23)
+        Me.PublishOnly.Size = New System.Drawing.Size(152, 23)
         Me.PublishOnly.TabIndex = 30
         Me.PublishOnly.Text = "Manually Post to Steem"
         Me.PublishOnly.UseVisualStyleBackColor = True
         '
         'FetchOnly
         '
-        Me.FetchOnly.Location = New System.Drawing.Point(183, 283)
+        Me.FetchOnly.Location = New System.Drawing.Point(277, 254)
         Me.FetchOnly.Name = "FetchOnly"
-        Me.FetchOnly.Size = New System.Drawing.Size(165, 23)
+        Me.FetchOnly.Size = New System.Drawing.Size(152, 23)
         Me.FetchOnly.TabIndex = 31
         Me.FetchOnly.Text = "Generate Report only"
         Me.FetchOnly.UseVisualStyleBackColor = True
@@ -373,11 +374,19 @@ Partial Class Form1
         Me.ODLK1.Text = "ODLK1"
         Me.ODLK1.UseVisualStyleBackColor = True
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(12, 285)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(259, 20)
+        Me.TextBox1.TabIndex = 36
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 311)
+        Me.ClientSize = New System.Drawing.Size(441, 321)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ODLK1)
         Me.Controls.Add(Me.DDAH)
         Me.Controls.Add(Me.Enigma)
@@ -450,4 +459,5 @@ Partial Class Form1
     Friend WithEvents Enigma As CheckBox
     Friend WithEvents DDAH As CheckBox
     Friend WithEvents ODLK1 As CheckBox
+    Friend WithEvents TextBox1 As TextBox
 End Class

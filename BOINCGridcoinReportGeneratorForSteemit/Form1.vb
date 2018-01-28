@@ -10,7 +10,7 @@ Public Class Form1
     End Sub
 
     Private Sub PublishOnly_Click(sender As Object, e As EventArgs) Handles PublishOnly.Click
-        If My.Computer.FileSystem.FileExists(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt") Then GenerateReport.PublishReport() Else MsgBox("report.txt doesn't exist.")
+        If My.Computer.FileSystem.FileExists(TextBox1.Text & "\report.txt") Then GenerateReport.PublishReport(DateTime.ParseExact(TextBox1.Text, "yyyy-MM-dd", Nothing)) Else MsgBox("report.txt doesn't exist.")
     End Sub
 
     Private Sub FetchOnly_Click(sender As Object, e As EventArgs) Handles FetchOnly.Click
@@ -76,7 +76,7 @@ Public Class Form1
         If YAFU.Checked Then FetchData.Create("http://yafu.myfirewall.org/yafu/stats/user.gz", "user.gz", "yafu", "user", "260")
         If YH.Checked Then FetchData.Create("https://www.rechenkraft.net/yoyo/stats/user.gz", "user.gz", "yoyo", "user", "1475")
         If Publish = True Then
-            GenerateReport.PublishReport()
+            GenerateReport.PublishReport(DateTime.Now)
         End If
     End Sub
 
@@ -110,6 +110,7 @@ Public Class Form1
         WCG.Checked = My.Settings.WCG
         YAFU.Checked = My.Settings.YAFU
         YH.Checked = My.Settings.YH
+        TextBox1.Text = DateTime.Now.ToString("yyyy-MM-dd")
     End Sub
 
     Private Sub AN_CheckedChanged(sender As Object, e As EventArgs) Handles AN.CheckedChanged
