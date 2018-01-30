@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text
-Imports MySql.Data.MySqlClient
 
 Public Class GenerateReport
     Public Shared Sub Headers()
@@ -14,12 +13,12 @@ Public Class GenerateReport
         ReportFile.Close()
     End Sub
     Public Shared Sub PublishReport(DateToUse As DateTime)
-        Dim MySQLFile As StreamReader = New StreamReader("account.txt")
+        Dim AccountFile As StreamReader = New StreamReader("account.txt")
         Dim currentline As String = ""
         Dim Account As String = ""
         Dim Key As String = ""
-        While MySQLFile.EndOfStream = False
-            currentline = MySQLFile.ReadLine
+        While AccountFile.EndOfStream = False
+            currentline = AccountFile.ReadLine
             If currentline.Contains("account") Then
                 Dim GetAccount As String() = currentline.Split("=")
                 Account = GetAccount(1)
