@@ -12,7 +12,7 @@ Public Class GenerateReport
         ReportFile.WriteLine("The following data has been fetched directly from their respective BOINC server stats location." & vbCrLf)
         ReportFile.Close()
     End Sub
-    Public Shared Sub PublishReport(DateToUse As DateTime)
+    Public Shared Sub PublishReport(DateToUse As DateTime, Optional Silent As Boolean = False)
         Dim AccountFile As StreamReader = New StreamReader("account.txt")
         Dim currentline As String = ""
         Dim Account As String = ""
@@ -44,10 +44,12 @@ Public Class GenerateReport
             reader.Close()
             dataStream.Close()
             response.Close()
-            If responseFromServer.Contains("ok") Then
-                MessageBox.Show("Report has been posted successfully")
-            Else
-                MessageBox.Show("An error occured while posting the report: " & Environment.NewLine & responseFromServer)
+            If Silent Then
+                If responseFromServer.Contains("ok") Then
+                    MessageBox.Show("Report has been posted successfully")
+                Else
+                    MessageBox.Show("An error occured while posting the report: " & Environment.NewLine & responseFromServer)
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("An error has occurred trying to post the report.")

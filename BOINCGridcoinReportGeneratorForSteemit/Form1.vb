@@ -16,7 +16,7 @@ Public Class Form1
     Private Sub FetchOnly_Click(sender As Object, e As EventArgs) Handles FetchOnly.Click
         MainRoutine(False)
     End Sub
-    Private Sub MainRoutine(Publish As Boolean)
+    Private Sub MainRoutine(Publish As Boolean, Optional Silent As Boolean = False)
         'Reads MySQL Config file:
         Dim MySQLFile As StreamReader = New StreamReader("MySQLConfig.txt")
         Dim currentline As String = ""
@@ -76,7 +76,7 @@ Public Class Form1
         If YAFU.Checked Then FetchData.Create("http://yafu.myfirewall.org/yafu/stats/user.gz", "user.gz", "yafu", "user", "260")
         If YH.Checked Then FetchData.Create("https://www.rechenkraft.net/yoyo/stats/user.gz", "user.gz", "yoyo", "user", "1475")
         If Publish = True Then
-            GenerateReport.PublishReport(DateTime.Now)
+            GenerateReport.PublishReport(DateTime.Now, Silent)
         End If
     End Sub
 
@@ -110,6 +110,13 @@ Public Class Form1
         WCG.Checked = My.Settings.WCG
         YAFU.Checked = My.Settings.YAFU
         YH.Checked = My.Settings.YH
+        Dim vars As String() = Environment.GetCommandLineArgs
+        If vars.Count > 1 Then
+            If vars(1) = "-s" Then
+                MainRoutine(True, True)
+                Me.Close()
+            End If
+        End If
         TextBox1.Text = DateTime.Now.ToString("yyyy-MM-dd")
     End Sub
 
@@ -217,7 +224,7 @@ Public Class Form1
         My.Settings.Save()
     End Sub
 
-    Private Sub tsnp_CheckedChanged(sender As Object, e As EventArgs) Handles tsnp.CheckedChanged
+    Private Sub Tsnp_CheckedChanged(sender As Object, e As EventArgs) Handles tsnp.CheckedChanged
         My.Settings.tsnp = tsnp.Checked
         My.Settings.Save()
     End Sub
