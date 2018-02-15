@@ -44,7 +44,7 @@ Public Class GenerateReport
             reader.Close()
             dataStream.Close()
             response.Close()
-            If Silent Then
+            If Silent = False Then
                 If responseFromServer.Contains("ok") Then
                     MessageBox.Show("Report has been posted successfully")
                 Else
