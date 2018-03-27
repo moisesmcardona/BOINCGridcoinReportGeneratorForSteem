@@ -44,7 +44,7 @@ Public Class GenerateReport
             reader.Close()
             dataStream.Close()
             response.Close()
-            If Silent Then
+            If Silent = False Then
                 If responseFromServer.Contains("ok") Then
                     MessageBox.Show("Report has been posted successfully")
                 Else
@@ -52,7 +52,7 @@ Public Class GenerateReport
                 End If
             End If
         Catch ex As Exception
-            MessageBox.Show("An error has occurred trying to post the report.")
+            MessageBox.Show("An error has occurred trying to post the report: " & ex.ToString)
         End Try
     End Sub
 End Class
