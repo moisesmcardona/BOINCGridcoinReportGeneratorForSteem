@@ -7,6 +7,8 @@ Public Class FetchData
     Public Shared Sub Create(link As String, downloadfilename As String, table As String, userxmlfile As String, teamid As String)
         Dim FileDownloadedAndExtracted As Boolean = False
         Try
+            If My.Computer.FileSystem.FileExists(downloadfilename) Then My.Computer.FileSystem.DeleteFile(downloadfilename )
+            If My.Computer.FileSystem.FileExists(userxmlfile) Then My.Computer.FileSystem.DeleteFile(userxmlfile)
             My.Computer.Network.DownloadFile(link, downloadfilename)
             Dim objProcess = New System.Diagnostics.Process()
             objProcess.StartInfo.FileName = "7za.exe"
@@ -21,7 +23,7 @@ Public Class FetchData
         Catch ex As Exception
             FileDownloadedAndExtracted = False
         End Try
-        If FileDownloadedAndExtracted = True Then
+        If FileDownloadedAndExtracted = True and my.Computer.FileSystem.FileExists(userxmlfile) then
             Dim xmlDoc As New XmlDocument()
             Dim MySQLServer As String = Form1.MySQLString
             xmlDoc.Load(userxmlfile)
@@ -256,6 +258,8 @@ Public Class FetchData
             Dim RenamedDownloadFile As String = table & " - " & Format(CurrentDateTime, "yyyy-MM-dd hh-mm-ss tt - ") & downloadfilename
             My.Computer.FileSystem.MoveFile(userxmlfile, DateTime.Now.ToString("yyyy-MM-dd") & "\" & RenamedXMLFile)
             My.Computer.FileSystem.MoveFile(downloadfilename, DateTime.Now.ToString("yyyy-MM-dd") & "\" & RenamedDownloadFile)
+        Else
+            My.Computer.FileSystem.WriteAllText ("error.log", Now().ToString() & " | Cannot process data from " & table & Environment.NewLine, True)
         End If
     End Sub
 End Class
