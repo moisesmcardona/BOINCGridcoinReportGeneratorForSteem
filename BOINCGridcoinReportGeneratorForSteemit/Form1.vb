@@ -56,7 +56,7 @@ Public Class Form1
         If Enigma.Checked Then FetchData.Create("http://www.enigmaathome.net/stats/user.gz", "user.gz", "enigma", "user", "2937")
         If GG.Checked Then FetchData.Create("http://gpugrid.net/stats/user.gz", "user.gz", "gpugrid", "user", "3493")
         If LC.Checked Then FetchData.Create("http://boinc.gorlaeus.net/stats/user.xml.gz", "user.xml.gz", "leidenclassical", "user.xml", "1629")
-        If LHCatH.Checked Then FetchData.Create("http://lhcathomeclassic.cern.ch/sixtrack/stats/user.gz", "user.gz", "lhcathomeclassic", "user", "8128")
+        If LHCatH.Checked Then FetchData.Create("https://lhcathome.cern.ch/lhcathome/stats/user.gz", "user.gz", "lhcathomeclassic", "user", "8128")
         If MW.Checked Then FetchData.Create("http://moowrap.net/stats/user.gz", "user.gz", "moowrap", "user", "2190")
         If MatH.Checked Then FetchData.Create("https://milkyway.cs.rpi.edu/milkyway/stats/user.gz", "user.gz", "milkywayathome", "user", "6566")
         If NatH.Checked Then FetchData.Create("https://escatter11.fullerton.edu/nfs/stats/user.gz", "user.gz", "nfsathome", "user", "2353")
