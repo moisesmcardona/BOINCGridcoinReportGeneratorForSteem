@@ -112,13 +112,13 @@ Public Class FetchData
                 SQLQuery = "SELECT * FROM " & table & " WHERE yesterday = 'new' ORDER BY name"
                 Dim Command4 = New MySqlCommand(SQLQuery, Connection)
                 Dim reader2 As MySqlDataReader = Command4.ExecuteReader
+                Dim counter As Integer = 0
                 If reader2.HasRows Then
-                    Dim counter As Integer = 0
                     While reader2.Read
                         counter = counter + 1
                     End While
-                    DataToWrite = counter.ToString
                 End If
+                DataToWrite = counter.ToString
                 Dim CurrentDateTime = Now()
                 Dim RenamedXMLFile As String = table & " - " & Format(CurrentDateTime, "yyyy-MM-dd hh-mm-ss tt - ") & userxmlfile
                 Dim RenamedDownloadFile As String = table & " - " & Format(CurrentDateTime, "yyyy-MM-dd hh-mm-ss tt - ") & downloadfilename
