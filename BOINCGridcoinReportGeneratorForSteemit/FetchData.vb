@@ -5,6 +5,7 @@ Imports MySql.Data.MySqlClient
 
 Public Class FetchData
     Public Shared Sub Create(link As String, downloadfilename As String, table As String, userxmlfile As String, teamid As String)
+        Dim DataToWrite As String = String.Empty
         Try
             Dim FileDownloadedAndExtracted As Boolean = False
             Try
@@ -112,147 +113,11 @@ Public Class FetchData
                 Dim Command4 = New MySqlCommand(SQLQuery, Connection)
                 Dim reader2 As MySqlDataReader = Command4.ExecuteReader
                 If reader2.HasRows Then
-                    Dim ReportFile As New System.IO.StreamWriter(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt", True)
-                    Dim ProjectMoreStatsURL As String = ""
-                    If table = "worldcommunitygrid" Then
-                        ReportFile.WriteLine("# World Community Grid")
-                        ReportFile.WriteLine("World Community Grid is a project that aims to solve real world issues like fighting disieases and researching new materials to provide clean water and energy. [Learn more about World Community Grid by clicking here.](https://worldcommunitygrid.org)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/world%20community%20grid"
-                    ElseIf table = "setiathome" Then
-                        ReportFile.WriteLine("# SETI@home")
-                        ReportFile.WriteLine("SETI@home is a project based at the University of California, Berkeley that aims to find extraterrestrial life. [Learn more about SETI@home by clicking here.](http://setiathome.berkeley.edu/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/seti@home"
-                    ElseIf table = "amicablenumbers" Then
-                        ReportFile.WriteLine("# Amicable Numbers")
-                        ReportFile.WriteLine("Amicable Numbers is a project that aims to find new Amicable Pairs. [Learn more about Amicable Numbers by clicking here.](https://sech.me/boinc/Amicable/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/amicable%20numbers"
-                    ElseIf table = "asteroidsathome" Then
-                        ReportFile.WriteLine("# Asteroids@home")
-                        ReportFile.WriteLine("Asteroids@home is a project that researches asteroids. [Learn more about Asteroids@home by clicking here.](http://asteroidsathome.net/boinc/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/asteroids@home"
-                    ElseIf table = "citizensciencegrid" Then
-                        ReportFile.WriteLine("# Citizen Science Grid")
-                        ReportFile.WriteLine("Citizen Science Grid is a project that does educational research in several areas. [Learn more about Citizen Science Grid by clicking here.](https://csgrid.org/csg/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/citizen%20science%20grid"
-                    ElseIf table = "collatzconjecture" Then
-                        ReportFile.WriteLine("# Collatz Conjecture")
-                        ReportFile.WriteLine("Collatz Conjecture is a project that aims to solve the Collatz Conjecture. [Learn more about Collatz Conjecture by clicking here.](https://boinc.thesonntags.com/collatz/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/collatz%20conjecture"
-                    ElseIf table = "cosmologyathome" Then
-                        ReportFile.WriteLine("# Cosmology@Home")
-                        ReportFile.WriteLine("Cosmology@Home is a project that aims to find the model that best describes the Universe. [Learn more about Cosmology@Home by clicking here.](https://www.cosmologyathome.org/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/cosmology@home"
-                    ElseIf table = "ddathome" Then
-                        ReportFile.WriteLine("# DrugDiscovery@Home")
-                        ReportFile.WriteLine("DrugDiscovery@Home is a project that aims to discover new drugs for several widespread and dangerous diseases. [Learn more about DrugDiscovery@Home by clicking here.](http://boinc.drugdiscoveryathome.com/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/drugdiscovery@home"
-                    ElseIf table = "einsteinathome" Then
-                        ReportFile.WriteLine("# einstein@home")
-                        ReportFile.WriteLine("einstein@home is a project that searches for gravitational waves from spinning isolated compact objects using data from the LIGO detector. [Learn more about einstein@home by clicking here.](https://einsteinathome.org/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/einstein@home"
-                    ElseIf table = "enigma" Then
-                        ReportFile.WriteLine("# Enigma@Home")
-                        ReportFile.WriteLine("Enigma@Home is a wrapper that aims to break the original Enigma messages. [Learn more about Enigma@Home by clicking here.](http://enigmaathome.net)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/enigma@home"
-                    ElseIf table = "gpugrid" Then
-                        ReportFile.WriteLine("# GPUGRID")
-                        ReportFile.WriteLine("GPUGRID is a project that does biomedical research. [Learn more about GPUGRID by clicking here.](http://gpugrid.net/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/gpugrid"
-                    ElseIf table = "leidenclassical" Then
-                        ReportFile.WriteLine("# Leiden Classical")
-                        ReportFile.WriteLine("Leiden Classical is a project that aims to build a computing grid for Classical Dynamics computation. [Learn more about Leiden Classical by clicking here.](http://boinc.gorlaeus.net/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/leiden%20classical"
-                    ElseIf table = "lhcathomeclassic" Then
-                        ReportFile.WriteLine("# LHC@home")
-                        ReportFile.WriteLine("LHC@home Classic is a project from CERN. [Learn more about LHC@home Classic by clicking here.](http://lhcathomeclassic.cern.ch/sixtrack/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/lhc@home%20classic"
-                    ElseIf table = "milkywayathome" Then
-                        ReportFile.WriteLine("# Milkyway@Home")
-                        ReportFile.WriteLine("Milkyway@Home is a project that aims to create a highly accurate three dimensional model from our Milkyway Galaxy. [Learn more about Milkyway@Home by clicking here.](https://milkyway.cs.rpi.edu/milkyway/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/milkyway@home"
-                    ElseIf table = "moowrap" Then
-                        ReportFile.WriteLine("# Moo! Wrapper")
-                        ReportFile.WriteLine("Moo! Wrapper is a wrapper for the distributed.net project and currently wraps their RC5-72 subproject. [Learn more about Moo! Wrapper by clicking here.](https://moowrap.net)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/moowrap"
-                    ElseIf table = "nfsathome" Then
-                        ReportFile.WriteLine("# NFS@Home")
-                        ReportFile.WriteLine("NFS@Home is a project that does number factorization. [Learn more about NFS@Home by clicking here.](https://escatter11.fullerton.edu/nfs/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/nfs@home"
-                    ElseIf table = "numberfieldsathome" Then
-                        ReportFile.WriteLine("# NumberFields@Home")
-                        ReportFile.WriteLine("NumberFields@Home Is a project that does research in number theory. [Learn more about NumberFields@Home by clicking here.](https://numberfields.asu.edu/NumberFields/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/numberfields@home"
-                    ElseIf table = "odlk1" Then
-                        ReportFile.WriteLine("# ODLK1")
-                        ReportFile.WriteLine("ODLK1 is a project that investigates Latin squares. [Learn more about ODLK1 by clicking here.](https://boinc.multi-pool.info/latinsquares/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/odlk1"
-                    ElseIf table = "primegrid" Then
-                        ReportFile.WriteLine("# PrimeGrid")
-                        ReportFile.WriteLine("PrimeGrid is a project that aims to find new prime numbers. [Learn more about PrimeGrid by clicking here.](http://primegrid.com/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/primegrid"
-                    ElseIf table = "rosettaathome" Then
-                        ReportFile.WriteLine("# Rosetta@home")
-                        ReportFile.WriteLine("Rosetta@home is a project that designs new proteins and predict 3rd-dimensional shapes. [Learn more about Rosetta@home by clicking here.](http://boinc.bakerlab.org/rosetta/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/rosetta@home"
-                    ElseIf table = "srbase" Then
-                        ReportFile.WriteLine("# SRBase")
-                        ReportFile.WriteLine("SRBase is a project that aims to solve Sierpinski/Riesel Bases up to 1030. [Learn more about SRBase by clicking here.](http://srbase.my-firewall.org/sr5/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/srbase"
-                    ElseIf table = "sourcefinder" Then
-                        ReportFile.WriteLine("# Sourcefinder")
-                        ReportFile.WriteLine("Sourcefinder tests the performance and quality of the Duchamp Sourcefinding application. [Learn more about Sourcefinder by clicking here.](https://sourcefinder.theskynet.org/duchamp/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/srbase"
-                    ElseIf table = "sdg" Then
-                        ReportFile.WriteLine("# SZTAKI Desktop Grid")
-                        ReportFile.WriteLine("SZTAKI Desktop Grid is a grid located at Budapest, Hungary. They run a variety of applications. [Learn more about SZTAKI Desktop Grid by clicking here.](http://szdg.lpds.sztaki.hu/szdg/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/sztaki%20desktop%20grid"
-                    ElseIf table = "tsnp" Then
-                        ReportFile.WriteLine("# theSkyNet POGS")
-                        ReportFile.WriteLine("theSkyNet POGS is a project that does research in Astronomy. [Learn more about theSkyNet POGS by clicking here.](https://pogs.theskynet.org/pogs/index.php)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/theskynet%20pogs"
-                    ElseIf table = "tngrid" Then
-                        ReportFile.WriteLine("# TN-Grid")
-                        ReportFile.WriteLine("TN-Grid is a grid located in Italy, currently running the gene@home application. [Learn more about TN-Grid by clicking here.](https://gene.disi.unitn.it/test/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/tn-grid"
-                    ElseIf table = "universeathome" Then
-                        ReportFile.WriteLine("# Universe@Home")
-                        ReportFile.WriteLine("Universe@Home is a project that researches fundamental problems of the Universe. [Learn more about Universe@Home by clicking here.](http://universeathome.pl/universe/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/universe@home"
-                    ElseIf table = "vgtu" Then
-                        ReportFile.WriteLine("# VGTU project@Home")
-                        ReportFile.WriteLine("VGTU project@Home is a project that aims to create a powerful supercomputer for scientists of VGTU and help them in their researches. [Learn more about VGTU project@Home by clicking here.](https://boinc.vgtu.lt/vtuathome/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/vgtu%20project@home"
-                    ElseIf table = "yafu" Then
-                        ReportFile.WriteLine("# YAFU")
-                        ReportFile.WriteLine("YAFU is a project that runs the YAFU software and factorizes numbers. [Learn more about YAFU by clicking here.](http://yafu.myfirewall.org/yafu/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/yafu"
-                    ElseIf table = "yoyo" Then
-                        ReportFile.WriteLine("# yoyo@home")
-                        ReportFile.WriteLine("yoyo@home is a project that acts as a wrapper of other distributed computing projects. [Learn more about yoyo@home by clicking here.](http://www.rechenkraft.net/yoyo/)" & vbCrLf)
-                        ProjectMoreStatsURL = "https://gridcoinstats.eu/project/yoyo@home"
-                    End If
                     Dim counter As Integer = 0
-                    Dim TableDataStream As MemoryStream = New MemoryStream
-                    Dim TableData As StreamWriter = New StreamWriter(TableDataStream)
-                    TableData.WriteLine("Name | Total Credits | Average Credit")
-                    TableData.WriteLine("---- | ------------- | --------------")
                     While reader2.Read
                         counter = counter + 1
-                        TableData.WriteLine(reader2("name") + " | " + Decimal.Round(reader2("totalcredits"), 2, MidpointRounding.AwayFromZero).ToString + " | " + Decimal.Round(reader2("average"), 2, MidpointRounding.AwayFromZero).ToString, True)
                     End While
-                    TableData.WriteLine(vbCrLf & "More stats from this project: ")
-                    TableData.WriteLine("[" & ProjectMoreStatsURL.Replace(" ", "%20") & "](" & ProjectMoreStatsURL.Replace(" ", "%20") & ")")
-                    TableData.Flush()
-                    TableDataStream.Position = 0
-                    If counter = 1 Then
-                        ReportFile.WriteLine("1 user has joined Team Gridcoin:" & vbCrLf)
-                        ReportFile.WriteLine(New StreamReader(TableDataStream).ReadToEnd)
-                    Else
-                        ReportFile.WriteLine(counter & " users have joined Team Gridcoin:" & vbCrLf)
-                        ReportFile.WriteLine(New StreamReader(TableDataStream).ReadToEnd)
-                    End If
-                    TableData.Close()
-                    ReportFile.Close()
+                    DataToWrite = counter.ToString
                 End If
                 Dim CurrentDateTime = Now()
                 Dim RenamedXMLFile As String = table & " - " & Format(CurrentDateTime, "yyyy-MM-dd hh-mm-ss tt - ") & userxmlfile
@@ -263,7 +128,71 @@ Public Class FetchData
                 My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Cannot process data from " & table & Environment.NewLine, True)
             End If
         Catch ex As Exception
+            DataToWrite = "Could not fetch export stats from the project server."
             My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Cannot process data from " & table & ": " & ex.ToString & Environment.NewLine, True)
         End Try
+        Dim ReportFile As New System.IO.StreamWriter(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt", True)
+        Dim ProjectName As String = String.Empty
+        If table = "worldcommunitygrid" Then
+            ProjectName = "World Community Grid | "
+        ElseIf table = "setiathome" Then
+            ProjectName = "SETI@home | "
+        ElseIf table = "amicablenumbers" Then
+            ProjectName = "Amicable Numbers | "
+        ElseIf table = "asteroidsathome" Then
+            ProjectName = "Asteroids@home | "
+        ElseIf table = "citizensciencegrid" Then
+            ProjectName = "Citizen Science Grid | "
+        ElseIf table = "collatzconjecture" Then
+            ProjectName = "Collatz Conjecture | "
+        ElseIf table = "cosmologyathome" Then
+            ProjectName = "Cosmology@Home | "
+        ElseIf table = "ddathome" Then
+            ProjectName = "DrugDiscovery@Home | "
+        ElseIf table = "einsteinathome" Then
+            ProjectName = "einstein@home | "
+        ElseIf table = "enigma" Then
+            ProjectName = "Enigma@Home | "
+        ElseIf table = "gpugrid" Then
+            ProjectName = "GPUGRID | "
+        ElseIf table = "leidenclassical" Then
+            ProjectName = "Leiden Classical | "
+        ElseIf table = "lhcathomeclassic" Then
+            ProjectName = "LHC@home | "
+        ElseIf table = "milkywayathome" Then
+            ProjectName = "Milkyway@Home | "
+        ElseIf table = "moowrap" Then
+            ProjectName = "Moo! Wrapper | "
+        ElseIf table = "nfsathome" Then
+            ProjectName = "NFS@Home | "
+        ElseIf table = "numberfieldsathome" Then
+            ProjectName = "NumberFields@Home | "
+        ElseIf table = "odlk1" Then
+            ProjectName = "ODLK1 | "
+        ElseIf table = "primegrid" Then
+            ProjectName = "PrimeGrid | "
+        ElseIf table = "rosettaathome" Then
+            ProjectName = "Rosetta@home | "
+        ElseIf table = "srbase" Then
+            ProjectName = "SRBase | "
+        ElseIf table = "sourcefinder" Then
+            ProjectName = "Sourcefinder | "
+        ElseIf table = "sdg" Then
+            ProjectName = "SZTAKI Desktop Grid | "
+        ElseIf table = "tsnp" Then
+            ProjectName = "theSkyNet POGS | "
+        ElseIf table = "tngrid" Then
+            ProjectName = "TN-Grid | "
+        ElseIf table = "universeathome" Then
+            ProjectName = "Universe@Home | "
+        ElseIf table = "vgtu" Then
+            ProjectName = "VGTU project@Home | "
+        ElseIf table = "yafu" Then
+            ProjectName = "YAFU | "
+        ElseIf table = "yoyo" Then
+            ProjectName = "yoyo@home | "
+        End If
+        ReportFile.WriteLine(ProjectName + DataToWrite)
+        ReportFile.Close()
     End Sub
 End Class

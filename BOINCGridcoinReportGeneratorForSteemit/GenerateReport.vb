@@ -6,10 +6,11 @@ Public Class GenerateReport
     Public Shared Sub Headers()
         Dim ReportFile As New System.IO.StreamWriter(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt", False)
         ReportFile.WriteLine("<center>![https://raw.githubusercontent.com/gridcoin-community/Gridcoin-Branding_Package/master/Images/gridcoin-blocks-header.png](https://raw.githubusercontent.com/gridcoin-community/Gridcoin-Branding_Package/master/Images/gridcoin-blocks-header.png)</center>" & vbCrLf)
-        ReportFile.WriteLine("Hi everyone," & vbCrLf)
-        ReportFile.WriteLine("This report includes new users that has joined Team Gridcoin on each project since yesterday's report. Reported here is their username, total credits, and their average credit. If a project didn't had any new user, it will not be reported here." & vbCrLf)
+        ReportFile.WriteLine("This report includes the total number of users that has joined Team Gridcoin on each project since yesterday's report. If a project didn't had any new user, it will be reported with a zero (0) count." & vbCrLf)
         ReportFile.WriteLine("Gridcoin is a decentralized cryptocurrency that rewards you for your contribution toward Science, Medicine, Math, Astronomy, and more! [Learn more about Gridcoin by clicking here and start getting rewarded for your BOINC computations now!](https://gridcoin.us)" & vbCrLf)
         ReportFile.WriteLine("The following data has been fetched directly from their respective BOINC server stats location." & vbCrLf)
+        ReportFile.WriteLine("Project | New Users ")
+        ReportFile.WriteLine("---- | -------------")
         ReportFile.Close()
     End Sub
     Public Shared Sub PublishReport(DateToUse As DateTime, Optional Silent As Boolean = False)
