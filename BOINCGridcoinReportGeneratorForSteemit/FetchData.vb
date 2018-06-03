@@ -1,26 +1,22 @@
-﻿Imports System.Globalization
-Imports System.IO
-Imports System.Xml
+﻿Imports System.Xml
 Imports MySql.Data.MySqlClient
 
 Public Class FetchData
     Public Shared Sub Create(link As String, downloadfilename As String, table As String, userxmlfile As String, teamid As String)
-        Dim DataToWrite As String = String.Empty
+        Dim DataToWrite As String = "Could not fetch export stats from the project server."
         Try
             Dim FileDownloadedAndExtracted As Boolean = False
             Try
                 If My.Computer.FileSystem.FileExists(downloadfilename) Then My.Computer.FileSystem.DeleteFile(downloadfilename)
                 If My.Computer.FileSystem.FileExists(userxmlfile) Then My.Computer.FileSystem.DeleteFile(userxmlfile)
                 My.Computer.Network.DownloadFile(link, downloadfilename)
-                Dim objProcess = New System.Diagnostics.Process()
-                objProcess.StartInfo.FileName = "7za.exe"
-                objProcess.StartInfo.Arguments = "x " & downloadfilename
-                objProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal
-                objProcess.Start()
-                'Wait until the process passes back an exit code 
-                objProcess.WaitForExit()
-                'Free resources associated with this process
-                objProcess.Close()
+                Dim ExtractProcess = New System.Diagnostics.Process()
+                ExtractProcess.StartInfo.FileName = "7za.exe"
+                ExtractProcess.StartInfo.Arguments = "x " & downloadfilename
+                ExtractProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                ExtractProcess.Start()
+                ExtractProcess.WaitForExit()
+                ExtractProcess.Close()
                 FileDownloadedAndExtracted = True
             Catch ex As Exception
                 FileDownloadedAndExtracted = False
@@ -107,7 +103,7 @@ Public Class FetchData
                 Try
                     Connection.Open()
                 Catch ex As Exception
-
+                      My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Could not open a connection to table " & table & ": " & ex.ToString & Environment.NewLine, True)
                 End Try
                 SQLQuery = "SELECT * FROM " & table & " WHERE yesterday = 'new' ORDER BY name"
                 Dim Command4 = New MySqlCommand(SQLQuery, Connection)
