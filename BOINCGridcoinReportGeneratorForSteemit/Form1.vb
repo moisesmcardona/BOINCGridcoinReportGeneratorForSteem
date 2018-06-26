@@ -24,6 +24,7 @@ Public Class Form1
         Dim MySQLUser As String = ""
         Dim MySQLPassword As String = ""
         Dim MySQLDatabase As String = ""
+        Dim MySQLSSLMode As String = ""
         While MySQLFile.EndOfStream = False
             currentline = MySQLFile.ReadLine
             If currentline.Contains("server") Then
@@ -38,9 +39,12 @@ Public Class Form1
             ElseIf currentline.Contains("database") Then
                 Dim GetDatabase As String() = currentline.Split("=")
                 MySQLDatabase = GetDatabase(1)
+            ElseIf currentline.Contains("sslmode") Then
+                Dim GetSSLMode As String() = currentline.Split("=")
+                MySQLSSLMode = GetSSLMode(1)
             End If
         End While
-        MySQLString = "server=" & MySQLServer & ";user=" & MySQLUser & ";database=" & MySQLDatabase & ";port=3306;password=" & MySQLPassword & ";"
+        MySQLString = "server=" & MySQLServer & ";user=" & MySQLUser & ";database=" & MySQLDatabase & ";port=3306;password=" & MySQLPassword & ";sslmode=" & MySQLSSLMode 
         MySQLFile.Close()
         If My.Computer.FileSystem.DirectoryExists(DateTime.Now.ToString("yyyy-MM-dd")) = False Then
             My.Computer.FileSystem.CreateDirectory(DateTime.Now.ToString("yyyy-MM-dd"))
