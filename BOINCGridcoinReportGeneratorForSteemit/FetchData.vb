@@ -103,7 +103,7 @@ Public Class FetchData
                 Try
                     Connection.Open()
                 Catch ex As Exception
-                      My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Could not open a connection to table " & table & ": " & ex.ToString & Environment.NewLine, True)
+                    My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Could not open a connection to table " & table & ": " & ex.ToString & Environment.NewLine, True)
                 End Try
                 SQLQuery = "SELECT * FROM " & table & " WHERE yesterday = 'new' ORDER BY name"
                 Dim Command4 = New MySqlCommand(SQLQuery, Connection)
@@ -124,7 +124,11 @@ Public Class FetchData
                 My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Cannot process data from " & table & Environment.NewLine, True)
             End If
         Catch ex As Exception
-            DataToWrite = "Could not fetch export stats from the project server."
+            If ex.ToString.Contains("System.Xml.XmlException") Then
+                DataToWrite = "Could not parse the project XML stats file."
+            Else
+                DataToWrite = "Could not fetch export stats from the project server."
+            End If
             My.Computer.FileSystem.WriteAllText("error.log", Now().ToString() & " | Cannot process data from " & table & ": " & ex.ToString & Environment.NewLine, True)
         End Try
         Dim ReportFile As New System.IO.StreamWriter(DateTime.Now.ToString("yyyy-MM-dd") & "\report.txt", True)
